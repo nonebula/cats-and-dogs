@@ -1,3 +1,8 @@
+const headline = document.getElementById("header");
+const dogRefreshBtn = document.getElementById("dog-refresh");
+const catRefreshBtn = document.getElementById("cat-refresh");
+const zooRefreshBtn = document.getElementById("zoo-refresh");
+
 // Style header to be exciting and fun
 
 // Fetch data for jokes and display [X]
@@ -24,7 +29,6 @@ async function getJoke() {
 
 // Dog image generation API
 async function fetchDog() {
-  document.getElementById("dog-section");
   try {
     const response = await fetch("https://random.dog/woof.json");
     const dogImg = await response.json();
@@ -36,7 +40,6 @@ async function fetchDog() {
 
 // Dog facts API
 async function dogFacts() {
-  document.getElementById("dog-section");
   try {
     const response = await fetch("https://dogapi.dog/api/v2/facts");
     const dogFact = await response.json();
@@ -46,11 +49,16 @@ async function dogFacts() {
   }
 }
 
-// Refresh button to recall both
+// Refresh button to recall dog
+const dogRefresh = () => {
+  fetchDog();
+  dogFacts();
+};
+
+dogRefreshBtn?.addEventListener("click", dogRefresh);
 
 // Cat image generation API
 async function fetchCat() {
-  document.getElementById("cat-section");
   try {
     const response = await fetch("https://api.thecatapi.com/v1/images/search");
     const catImg = await response.json();
@@ -80,20 +88,20 @@ async function catFacts() {
   }
 }
 
-// Refresh button to recall both
+// Refresh button to recall cat
+const catRefresh = () => {
+  fetchCat();
+  catFacts();
+};
 
-// Zoo animal image generation API
-
-// Zoo animal facts API
-
-// Refresh button to recall both
+catRefreshBtn?.addEventListener("click", catRefresh);
 
 // Initial Function Calls
 
 getJoke();
 
 fetchDog();
-fetchCat();
-
 dogFacts();
+
+fetchCat();
 catFacts();
