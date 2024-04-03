@@ -77,6 +77,26 @@ function fetchCat() {
     });
 }
 // Cat facts API
+function catFacts() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const url = "https://random-cat-fact.p.rapidapi.com/";
+        const options = {
+            method: "GET",
+            headers: {
+                "X-RapidAPI-Key": "aeef6d6de3mshfec18a533464299p1bb9f9jsnba5e698e206b",
+                "X-RapidAPI-Host": "random-cat-fact.p.rapidapi.com",
+            },
+        };
+        try {
+            const response = yield fetch(url, options);
+            const result = yield response.text();
+            console.log(result);
+        }
+        catch (error) {
+            console.error(error);
+        }
+    });
+}
 // Refresh button to recall both
 // Zoo animal image generation API
 // Zoo animal facts API
@@ -86,3 +106,4 @@ getJoke();
 fetchDog();
 fetchCat();
 dogFacts();
+catFacts();
