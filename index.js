@@ -11,32 +11,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const headline = document.getElementById("header");
 const dogRefreshBtn = document.getElementById("dog-refresh");
 const catRefreshBtn = document.getElementById("cat-refresh");
-const zooRefreshBtn = document.getElementById("zoo-refresh");
 // Style header to be exciting and fun
 // Fetch data for jokes and display [X]
-function getJoke() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch("https://icanhazdadjoke.com/", {
-                headers: {
-                    Accept: "application/json", // Request JSON response
-                    "User-Agent": "YourLibraryOrWebsiteName (https://yourwebsite.com)",
-                },
-            });
-            if (response.ok) {
-                const jokeData = yield response.json(); // Parse response as JSON
-                const jokeText = jokeData.joke; // Extract the joke text from the response
-                console.log(jokeText); // Output the joke text
-            }
-            else {
-                throw new Error("Failed to fetch joke");
-            }
+const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield fetch("https://icanhazdadjoke.com/", {
+            headers: {
+                Accept: "application/json",
+                "User-Agent": "YourLibraryOrWebsiteName (https://yourwebsite.com)",
+            },
+        });
+        if (response.ok) {
+            const jokeData = yield response.json();
+            const jokeText = jokeData.joke;
+            console.log(jokeText);
         }
-        catch (error) {
-            console.error("Error fetching joke:", error);
+        else {
+            throw new Error("Failed to fetch joke");
         }
-    });
-}
+    }
+    catch (error) {
+        console.error("Error fetching joke:", error);
+    }
+});
 // Dog image generation API
 function fetchDog() {
     return __awaiter(this, void 0, void 0, function* () {

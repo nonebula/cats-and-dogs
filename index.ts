@@ -1,37 +1,59 @@
-const headline = document.getElementById("header");
-const dogRefreshBtn = document.getElementById("dog-refresh");
-const catRefreshBtn = document.getElementById("cat-refresh");
-const zooRefreshBtn = document.getElementById("zoo-refresh");
+// Defining Types
+type JokeData = {
+  joke: string;
+};
+
+type DogImage = {
+  url: string;
+};
+
+type DogFact = {
+  data: {
+    attributes: {
+      body: string;
+    };
+  }[];
+};
+
+type CatImage = {
+  url: string;
+};
+
+const headline: HTMLElement | null = document.getElementById("header");
+const dogRefreshBtn: HTMLElement | null =
+  document.getElementById("dog-refresh");
+const catRefreshBtn: HTMLElement | null =
+  document.getElementById("cat-refresh");
 
 // Style header to be exciting and fun
 
 // Fetch data for jokes and display [X]
-async function getJoke() {
+const getJoke = async (): Promise<void> => {
   try {
     const response = await fetch("https://icanhazdadjoke.com/", {
       headers: {
-        Accept: "application/json", // Request JSON response
+        Accept: "application/json",
         "User-Agent": "YourLibraryOrWebsiteName (https://yourwebsite.com)",
       },
     });
 
     if (response.ok) {
-      const jokeData = await response.json(); // Parse response as JSON
-      const jokeText = jokeData.joke; // Extract the joke text from the response
-      console.log(jokeText); // Output the joke text
+      const jokeData: JokeData = await response.json();
+      const jokeText: string = jokeData.joke;
+      console.log(jokeText);
     } else {
       throw new Error("Failed to fetch joke");
     }
   } catch (error) {
     console.error("Error fetching joke:", error);
   }
-}
+};
 
 // Dog image generation API
-async function fetchDog() {
+async function fetchDog(): Promise<void> {
   try {
     const response = await fetch("https://random.dog/woof.json");
-    const dogImg = await response.json();
+    const dogImg: DogImage = await response.json();
     console.log(dogImg.url);
   } catch (error) {
     console.error("Error fetching dog image:", error);
@@ -39,10 +61,10 @@ async function fetchDog() {
 }
 
 // Dog facts API
-async function dogFacts() {
+async function dogFacts(): Promise<void> {
   try {
     const response = await fetch("https://dogapi.dog/api/v2/facts");
-    const dogFact = await response.json();
+    const dogFact: DogFact = await response.json();
     console.log(dogFact.data[0].attributes.body);
   } catch (error) {
     console.error("Error fetching dog fact:", error);
@@ -50,7 +72,7 @@ async function dogFacts() {
 }
 
 // Refresh button to recall dog
-const dogRefresh = () => {
+const dogRefresh = (): void => {
   fetchDog();
   dogFacts();
 };
@@ -58,10 +80,10 @@ const dogRefresh = () => {
 dogRefreshBtn?.addEventListener("click", dogRefresh);
 
 // Cat image generation API
-async function fetchCat() {
+async function fetchCat(): Promise<void> {
   try {
     const response = await fetch("https://api.thecatapi.com/v1/images/search");
-    const catImg = await response.json();
+    const catImg: CatImage[] = await response.json();
     console.log(catImg[0].url);
   } catch (error) {
     console.error("Error fetching cat image:", error);
@@ -69,9 +91,9 @@ async function fetchCat() {
 }
 
 // Cat facts API
-async function catFacts() {
+async function catFacts(): Promise<void> {
   const url = "https://random-cat-fact.p.rapidapi.com/";
-  const options = {
+  const options: RequestInit = {
     method: "GET",
     headers: {
       "X-RapidAPI-Key": "aeef6d6de3mshfec18a533464299p1bb9f9jsnba5e698e206b",
@@ -81,7 +103,7 @@ async function catFacts() {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.text();
+    const result: string = await response.text();
     console.log(result);
   } catch (error) {
     console.error(error);
@@ -89,7 +111,7 @@ async function catFacts() {
 }
 
 // Refresh button to recall cat
-const catRefresh = () => {
+const catRefresh = (): void => {
   fetchCat();
   catFacts();
 };
