@@ -35,10 +35,30 @@ async function fetchDog() {
 }
 
 // Dog facts API
+async function dogFacts() {
+  document.getElementById("dog-section");
+  try {
+    const response = await fetch("https://dogapi.dog/api/v2/facts");
+    const dogFact = await response.json();
+    console.log(dogFact.data[0].attributes.body);
+  } catch (error) {
+    console.error("Error fetching dog fact:", error);
+  }
+}
 
 // Refresh button to recall both
 
 // Cat image generation API
+async function fetchCat() {
+  document.getElementById("cat-section");
+  try {
+    const response = await fetch("https://api.thecatapi.com/v1/images/search");
+    const catImg = await response.json();
+    console.log(catImg[0].url);
+  } catch (error) {
+    console.error("Error fetching cat image:", error);
+  }
+}
 
 // Cat facts API
 
@@ -53,4 +73,8 @@ async function fetchDog() {
 // Initial Function Calls
 
 getJoke();
+
 fetchDog();
+fetchCat();
+
+dogFacts();

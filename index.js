@@ -34,16 +34,6 @@ function getJoke() {
     });
 }
 // Dog image generation API
-// Dog facts API
-// Refresh button to recall both
-// Cat image generation API
-// Cat facts API
-// Refresh button to recall both
-// Zoo animal image generation API
-// Zoo animal facts API
-// Refresh button to recall both
-// Initial Function Calls
-getJoke();
 function fetchDog() {
     return __awaiter(this, void 0, void 0, function* () {
         document.getElementById("dog-section");
@@ -57,4 +47,42 @@ function fetchDog() {
         }
     });
 }
+// Dog facts API
+function dogFacts() {
+    return __awaiter(this, void 0, void 0, function* () {
+        document.getElementById("dog-section");
+        try {
+            const response = yield fetch("https://dogapi.dog/api/v2/facts");
+            const dogFact = yield response.json();
+            console.log(dogFact.data[0].attributes.body);
+        }
+        catch (error) {
+            console.error("Error fetching dog fact:", error);
+        }
+    });
+}
+// Refresh button to recall both
+// Cat image generation API
+function fetchCat() {
+    return __awaiter(this, void 0, void 0, function* () {
+        document.getElementById("cat-section");
+        try {
+            const response = yield fetch("https://api.thecatapi.com/v1/images/search");
+            const catImg = yield response.json();
+            console.log(catImg[0].url);
+        }
+        catch (error) {
+            console.error("Error fetching cat image:", error);
+        }
+    });
+}
+// Cat facts API
+// Refresh button to recall both
+// Zoo animal image generation API
+// Zoo animal facts API
+// Refresh button to recall both
+// Initial Function Calls
+getJoke();
 fetchDog();
+fetchCat();
+dogFacts();
