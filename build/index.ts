@@ -19,6 +19,7 @@ type CatImage = {
   url: string;
 };
 
+// Getting elements by ID
 const headline: HTMLElement | null = document.getElementById("header");
 const dogRefreshBtn: HTMLElement | null =
   document.getElementById("dog-refresh");

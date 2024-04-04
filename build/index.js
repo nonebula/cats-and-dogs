@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// Getting elements by ID
 const headline = document.getElementById("header");
 const dogRefreshBtn = document.getElementById("dog-refresh");
 const catRefreshBtn = document.getElementById("cat-refresh");
