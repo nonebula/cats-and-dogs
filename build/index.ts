@@ -55,24 +55,30 @@ const getJoke = async (): Promise<void> => {
 };
 
 // Dog image generation API
+// Dog image generation API
 async function fetchDog(): Promise<void> {
   try {
-    const response = await fetch("https://random.dog/woof.json");
-    const dogImg: DogImage = await response.json();
-    // console.log(dogImg.url);
-    const dogImageUrl = dogImg.url;
+    let dogImageUrl: string;
 
+    // Fetch dog URL until it's an image
+    do {
+      const response = await fetch("https://random.dog/woof.json");
+      const dogImg: DogImage = await response.json();
+      console.log(dogImg.url);
+      dogImageUrl = dogImg.url;
+    } while (!dogImageUrl.endsWith(".jpg") && !dogImageUrl.endsWith(".jpeg"));
+
+    // Get the existing image element with the ID "dog-image"
     const dogImgElement = document.getElementById(
       "dog-image"
     ) as HTMLImageElement;
+
+    // Set the source of the image to the retrieved URL
     dogImgElement.src = dogImageUrl;
 
+    // Style the image element
     dogImgElement.style.maxWidth = "500px";
     dogImgElement.style.maxHeight = "500px";
-
-    const container = document.getElementById("dog-image-container");
-    container.innerHTML = "";
-    container?.appendChild(dogImgElement);
   } catch (error) {
     console.error("Error fetching dog image:", error);
   }

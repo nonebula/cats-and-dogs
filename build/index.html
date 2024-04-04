@@ -9,19 +9,23 @@
   </head>
   <body class="min-h-screen flex-wrap">
     <!-- Header -->
-    <div class="bg-cyan-600 min-h-20 text-7xl font-bold">
-      <header id="header" class="flex place-content-center">
-        Raining Cats and Dogs
-      </header>
+    <div
+      class="bg-cyan-600 flex h-48 text-7xl font-bold items-center justify-center"
+    >
+      <header id="header" class="">It's Raining Cats and Dogs!</header>
     </div>
     <!-- Banner -->
-    <div class="bg-yellow-300 h-32 ">
+    <div class="h-32 flex items-center justify-center text-xl font-medium">
       <section id="banner" class="">Jokes Banner</section>
     </div>
-    <div class="bg-red-400 flex flex-grow h-screen">
+    <div class="flex flex-grow h-screen">
       <!-- Dog Section -->
-      <section id="dog-section" class="w-1/2 p-4 flex flex-col h-full">
-        <h2 class="text-lg">Dog Section</h2>
+      <section
+        id="dog-section"
+        class="w-1/2 p-4 flex flex-col justify-between h-full"
+      >
+        <h2 class="text-lg font-bold mb-5">Look at these lovely doggies!</h2>
+
         <div id="dog-image-container" class="mb-4">
           <img
             id="dog-image"
@@ -30,6 +34,7 @@
             class=""
           />
         </div>
+
         <div id="dog-fact-container" class="mb-4">Dog Fact</div>
         <button
           id="dog-refresh"
@@ -39,8 +44,11 @@
         </button>
       </section>
       <!-- Cat Section -->
-      <section id="cat-section" class="w-1/2 p-4 flex flex-col h-full">
-        <h2 class="text-lg">Cat Section</h2>
+      <section
+        id="cat-section"
+        class="w-1/2 p-4 flex flex-col justify-between h-full"
+      >
+        <h2 class="text-lg font-bold mb-5">And these lovely cats!</h2>
         <div id="cat-image-container" class="mb-4">
           <img
             id="cat-image"
@@ -49,18 +57,25 @@
             class=""
           />
         </div>
-        <div id="cat-fact-container" class="mb-4">Cat Fact</div>
-        <button
-          id="cat-refresh"
-          class="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded focus:outline-none focus:ring-blue-300 active:bg-blue-700"
-        >
-          Refresh
-        </button>
+        <div class="">
+          <div id="cat-fact-container" class="mb-4">Cat Fact</div>
+          <button
+            id="cat-refresh"
+            class="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded focus:outline-none focus:ring-blue-300 active:bg-blue-700"
+          >
+            Refresh
+          </button>
+        </div>
       </section>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-purple-400 fixed bottom-0 w-full">Footer</footer>
+    <footer
+      class="bg-cyan-600 fixed bottom-0 w-full h-20 flex items-center justify-center italic"
+    >
+      Last night me and my girlfriend watched three DVDs back to back. Luckily I
+      was the one facing the TV.
+    </footer>
   </body>
   <script src="./index.js"></script>
 </html>
