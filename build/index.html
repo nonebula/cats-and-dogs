@@ -3,35 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="css/style.css" />
     <title>It's Raining Cats and Dogs!</title>
   </head>
   <body class="min-h-screen flex-wrap">
+    <!-- Header -->
     <div class="bg-cyan-600 min-h-20 text-7xl font-bold">
       <header id="header" class="flex place-content-center">
         Raining Cats and Dogs
       </header>
     </div>
-    <div class="bg-yellow-300">
+    <!-- Banner -->
+    <div class="bg-yellow-300 h-32 ">
       <section id="banner" class="">Jokes Banner</section>
     </div>
-    <div class="bg-red-400">
-      <section id="dog-section" class="">
-        <h2>Dog Section</h2>
-        <div id="dog-image">Dog Image</div>
-        <div id="dog-fact">Dog Fact</div>
-        <button id="dog-refresh" class="">Refresh</button>
+    <div class="bg-red-400 flex flex-grow h-screen">
+      <!-- Dog Section -->
+      <section id="dog-section" class="w-1/2 p-4 flex flex-col h-full">
+        <h2 class="text-lg">Dog Section</h2>
+        <div id="dog-image-container" class="mb-4">
+          <img
+            id="dog-image"
+            src="../assets/images/dog-placeholder.jpeg"
+            alt="Dog Placeholder Image"
+            class=""
+          />
+        </div>
+        <div id="dog-fact-container" class="mb-4">Dog Fact</div>
+        <button
+          id="dog-refresh"
+          class="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded focus:outline-none focus:ring-blue-300 active:bg-blue-700"
+        >
+          Refresh
+        </button>
+      </section>
+      <!-- Cat Section -->
+      <section id="cat-section" class="w-1/2 p-4 flex flex-col h-full">
+        <h2 class="text-lg">Cat Section</h2>
+        <div id="cat-image-container" class="mb-4">
+          <img
+            id="cat-image"
+            src="../assets/images/cat-placeholder.jpeg"
+            alt="Cat Placeholder Image"
+            class=""
+          />
+        </div>
+        <div id="cat-fact-container" class="mb-4">Cat Fact</div>
+        <button
+          id="cat-refresh"
+          class="btn bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded focus:outline-none focus:ring-blue-300 active:bg-blue-700"
+        >
+          Refresh
+        </button>
       </section>
     </div>
-    <div class="bg-green-400">
-      <section id="cat-section" class="">
-        <h2>Cat Section</h2>
-        <div id="cat-image">Cat Image</div>
-        <div id="cat-fact">Cat Fact</div>
-        <button id="cat-refresh" class="">Refresh</button>
-      </section>
-    </div>
-    <footer class="bg-purple-400">Footer</footer>
+
+    <!-- Footer -->
+    <footer class="bg-purple-400 fixed bottom-0 w-full">Footer</footer>
   </body>
   <script src="./index.js"></script>
 </html>

@@ -25,7 +25,10 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         if (response.ok) {
             const jokeData = yield response.json();
             const jokeText = jokeData.joke;
-            console.log(jokeText);
+            // console.log(jokeText);
+            const container = document.getElementById("banner");
+            container === null || container === void 0 ? void 0 : container.textContent = "";
+            container === null || container === void 0 ? void 0 : container.append(jokeText);
         }
         else {
             throw new Error("Failed to fetch joke");
@@ -41,7 +44,15 @@ function fetchDog() {
         try {
             const response = yield fetch("https://random.dog/woof.json");
             const dogImg = yield response.json();
-            console.log(dogImg.url);
+            // console.log(dogImg.url);
+            const dogImageUrl = dogImg.url;
+            const dogImgElement = document.getElementById("dog-image");
+            dogImgElement.src = dogImageUrl;
+            dogImgElement.style.maxWidth = "500px";
+            dogImgElement.style.maxHeight = "500px";
+            const container = document.getElementById("dog-image-container");
+            container.innerHTML = "";
+            container === null || container === void 0 ? void 0 : container.appendChild(dogImgElement);
         }
         catch (error) {
             console.error("Error fetching dog image:", error);
@@ -54,7 +65,11 @@ function dogFacts() {
         try {
             const response = yield fetch("https://dogapi.dog/api/v2/facts");
             const dogFact = yield response.json();
-            console.log(dogFact.data[0].attributes.body);
+            // console.log(dogFact.data[0].attributes.body);
+            const container = document.getElementById("dog-fact-container");
+            container.textContent = "";
+            const dogFactText = JSON.stringify(dogFact.data[0].attributes.body);
+            container === null || container === void 0 ? void 0 : container.append(dogFactText);
         }
         catch (error) {
             console.error("Error fetching dog fact:", error);
@@ -73,7 +88,12 @@ function fetchCat() {
         try {
             const response = yield fetch("https://api.thecatapi.com/v1/images/search");
             const catImg = yield response.json();
-            console.log(catImg[0].url);
+            // console.log(catImg[0].url);
+            const catImageUrl = catImg[0].url;
+            const catImgElement = document.getElementById("cat-image");
+            catImgElement.src = catImageUrl;
+            catImgElement.style.maxWidth = "500px";
+            catImgElement.style.maxHeight = "500px";
         }
         catch (error) {
             console.error("Error fetching cat image:", error);
@@ -94,7 +114,11 @@ function catFacts() {
         try {
             const response = yield fetch(url, options);
             const result = yield response.text();
-            console.log(result);
+            // console.log(result);
+            const container = document.getElementById("cat-fact-container");
+            container === null || container === void 0 ? void 0 : container.textContent = "";
+            const catFact = JSON.stringify(result);
+            container === null || container === void 0 ? void 0 : container.append(catFact);
         }
         catch (error) {
             console.error(error);
