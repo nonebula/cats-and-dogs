@@ -79,6 +79,8 @@ async function fetchDog(): Promise<void> {
     // Style the image element
     dogImgElement.style.maxWidth = "500px";
     dogImgElement.style.maxHeight = "500px";
+    dogImgElement.style.minWidth = "300px";
+    dogImgElement.style.minHeight = "300px";
   } catch (error) {
     console.error("Error fetching dog image:", error);
   }
@@ -123,6 +125,8 @@ async function fetchCat(): Promise<void> {
 
     catImgElement.style.maxWidth = "500px";
     catImgElement.style.maxHeight = "500px";
+    catImgElement.style.minWidth = "300px";
+    catImgElement.style.minHeight = "300px";
   } catch (error) {
     console.error("Error fetching cat image:", error);
   }
@@ -146,8 +150,8 @@ async function catFacts(): Promise<void> {
 
     const container = document.getElementById("cat-fact-container");
     container?.textContent = "";
-    const catFact = JSON.stringify(result);
-    container?.append(catFact);
+    const stringCatFact = JSON.stringify(result);
+    container?.append(stringCatFact);
   } catch (error) {
     console.error(error);
   }

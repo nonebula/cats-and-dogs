@@ -58,6 +58,8 @@ function fetchDog() {
             // Style the image element
             dogImgElement.style.maxWidth = "500px";
             dogImgElement.style.maxHeight = "500px";
+            dogImgElement.style.minWidth = "300px";
+            dogImgElement.style.minHeight = "300px";
         }
         catch (error) {
             console.error("Error fetching dog image:", error);
@@ -99,6 +101,8 @@ function fetchCat() {
             catImgElement.src = catImageUrl;
             catImgElement.style.maxWidth = "500px";
             catImgElement.style.maxHeight = "500px";
+            catImgElement.style.minWidth = "300px";
+            catImgElement.style.minHeight = "300px";
         }
         catch (error) {
             console.error("Error fetching cat image:", error);
@@ -122,8 +126,8 @@ function catFacts() {
             // console.log(result);
             const container = document.getElementById("cat-fact-container");
             container === null || container === void 0 ? void 0 : container.textContent = "";
-            const catFact = JSON.stringify(result);
-            container === null || container === void 0 ? void 0 : container.append(catFact);
+            const stringCatFact = JSON.stringify(result);
+            container === null || container === void 0 ? void 0 : container.append(stringCatFact);
         }
         catch (error) {
             console.error(error);
