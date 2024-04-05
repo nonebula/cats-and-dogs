@@ -53,7 +53,7 @@ A screenshot of the page.
 
 ## Getting Started
 
-Given this is a simple project, all you need to do to get started is to visit the GitHub pages site at: https://nonebula.github.io/cats-and-dogs/. Use the refresh buttons to regenerate the facts and images, refresh the page to see more jokes.
+Given this is a simple project, all you need to do to get started is to visit the GitHub pages site at: https://raining-cats-and-dogs.netlify.app. Use the refresh buttons to regenerate the facts and images, refresh the page to see more jokes.
 
 I hope you enjoy the page and learn something new!
 
@@ -77,7 +77,7 @@ Distributed under the MIT License. See the license for more information.
 
 Joe Higgs - [@no_nebula_8421](https://twitter.com/no_nebula_8421) - joe.higgs@live.com
 
-Project Link: [https://github.com/nonebula/cats-and-dogs](https://nonebula.github.io/cats-and-dogs/)
+Project Link: [https://github.com/nonebula/cats-and-dogs](https://raining-cats-and-dogs.netlify.app)
 
 ## Acknowledgments
 
