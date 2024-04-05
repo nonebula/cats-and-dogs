@@ -1,4 +1,3 @@
-// Defining Types
 type JokeData = {
   joke: string;
 };
@@ -19,16 +18,12 @@ type CatImage = {
   url: string;
 };
 
-// Getting elements by ID
 const headline: HTMLElement | null = document.getElementById("header");
 const dogRefreshBtn: HTMLElement | null =
   document.getElementById("dog-refresh");
 const catRefreshBtn: HTMLElement | null =
   document.getElementById("cat-refresh");
 
-// Style header to be exciting and fun
-
-// Fetch data for jokes and display [X]
 const getJoke = async (): Promise<void> => {
   try {
     const response = await fetch("https://icanhazdadjoke.com/", {
@@ -41,11 +36,14 @@ const getJoke = async (): Promise<void> => {
     if (response.ok) {
       const jokeData: JokeData = await response.json();
       const jokeText: string = jokeData.joke;
-      // console.log(jokeText);
 
       const container = document.getElementById("banner");
-      container?.textContent = "";
-      container?.append(jokeText);
+      if (!container) {
+        console.error("Container not found.");
+        return;
+      }
+      container.textContent = "";
+      container.append(jokeText);
     } else {
       throw new Error("Failed to fetch joke");
     }
@@ -54,13 +52,10 @@ const getJoke = async (): Promise<void> => {
   }
 };
 
-// Dog image generation API
-// Dog image generation API
 async function fetchDog(): Promise<void> {
   try {
     let dogImageUrl: string;
 
-    // Fetch dog URL until it's an image
     do {
       const response = await fetch("https://random.dog/woof.json");
       const dogImg: DogImage = await response.json();
@@ -68,15 +63,12 @@ async function fetchDog(): Promise<void> {
       dogImageUrl = dogImg.url;
     } while (!dogImageUrl.endsWith(".jpg") && !dogImageUrl.endsWith(".jpeg"));
 
-    // Get the existing image element with the ID "dog-image"
     const dogImgElement = document.getElementById(
       "dog-image"
     ) as HTMLImageElement;
 
-    // Set the source of the image to the retrieved URL
     dogImgElement.src = dogImageUrl;
 
-    // Style the image element
     dogImgElement.style.maxWidth = "500px";
     dogImgElement.style.maxHeight = "500px";
     dogImgElement.style.minWidth = "300px";
@@ -86,14 +78,18 @@ async function fetchDog(): Promise<void> {
   }
 }
 
-// Dog facts API
 async function dogFacts(): Promise<void> {
   try {
     const response = await fetch("https://dogapi.dog/api/v2/facts");
     const dogFact: DogFact = await response.json();
-    // console.log(dogFact.data[0].attributes.body);
 
     const container = document.getElementById("dog-fact-container");
+
+    if (!container) {
+      console.error("Container not found.");
+      return;
+    }
+
     container.textContent = "";
     const dogFactText = JSON.stringify(dogFact.data[0].attributes.body);
     container?.append(dogFactText);
@@ -102,7 +98,6 @@ async function dogFacts(): Promise<void> {
   }
 }
 
-// Refresh button to recall dog
 const dogRefresh = (): void => {
   fetchDog();
   dogFacts();
@@ -110,12 +105,10 @@ const dogRefresh = (): void => {
 
 dogRefreshBtn?.addEventListener("click", dogRefresh);
 
-// Cat image generation API
 async function fetchCat(): Promise<void> {
   try {
     const response = await fetch("https://api.thecatapi.com/v1/images/search");
     const catImg: CatImage[] = await response.json();
-    // console.log(catImg[0].url);
     const catImageUrl = catImg[0].url;
 
     const catImgElement = document.getElementById(
@@ -132,7 +125,6 @@ async function fetchCat(): Promise<void> {
   }
 }
 
-// Cat facts API
 async function catFacts(): Promise<void> {
   const url = "https://random-cat-fact.p.rapidapi.com/";
   const options: RequestInit = {
@@ -145,19 +137,34 @@ async function catFacts(): Promise<void> {
 
   try {
     const response = await fetch(url, options);
-    const result: string = await response.text();
-    // console.log(result);
+    const result = await response.text();
 
     const container = document.getElementById("cat-fact-container");
-    container?.textContent = "";
-    const stringCatFact = JSON.stringify(result);
-    container?.append(stringCatFact);
+    if (!container) {
+      console.error("Container not found");
+      return;
+    }
+
+    container.textContent = "";
+
+    const parsedResult = JSON.parse(result);
+
+    container.textContent = parsedResult.message;
+
+    if (
+      parsedResult.message ===
+      "You have exceeded the rate limit per hour for your plan, BASIC, by the API provider"
+    ) {
+      container.textContent =
+        "The API has reached it's limit :(. Here's a fun fact! The phrase raining cats and dogs originated in 17th century England when it is believed that many cats and dogs drowned during heavy periods of rain.";
+    } else {
+      container.textContent = parsedResult.message;
+    }
   } catch (error) {
     console.error(error);
   }
 }
 
-// Refresh button to recall cat
 const catRefresh = (): void => {
   fetchCat();
   catFacts();
@@ -165,12 +172,8 @@ const catRefresh = (): void => {
 
 catRefreshBtn?.addEventListener("click", catRefresh);
 
-// Initial Function Calls
-
 getJoke();
-
 fetchDog();
 dogFacts();
-
 fetchCat();
 catFacts();

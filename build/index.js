@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Getting elements by ID
 const headline = document.getElementById("header");
 const dogRefreshBtn = document.getElementById("dog-refresh");
 const catRefreshBtn = document.getElementById("cat-refresh");
-// Style header to be exciting and fun
-// Fetch data for jokes and display [X]
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch("https://icanhazdadjoke.com/", {
@@ -25,10 +22,13 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         if (response.ok) {
             const jokeData = yield response.json();
             const jokeText = jokeData.joke;
-            // console.log(jokeText);
             const container = document.getElementById("banner");
-            container === null || container === void 0 ? void 0 : container.textContent = "";
-            container === null || container === void 0 ? void 0 : container.append(jokeText);
+            if (!container) {
+                console.error("Container not found.");
+                return;
+            }
+            container.textContent = "";
+            container.append(jokeText);
         }
         else {
             throw new Error("Failed to fetch joke");
@@ -38,24 +38,18 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error("Error fetching joke:", error);
     }
 });
-// Dog image generation API
-// Dog image generation API
 function fetchDog() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let dogImageUrl;
-            // Fetch dog URL until it's an image
             do {
                 const response = yield fetch("https://random.dog/woof.json");
                 const dogImg = yield response.json();
                 console.log(dogImg.url);
                 dogImageUrl = dogImg.url;
             } while (!dogImageUrl.endsWith(".jpg") && !dogImageUrl.endsWith(".jpeg"));
-            // Get the existing image element with the ID "dog-image"
             const dogImgElement = document.getElementById("dog-image");
-            // Set the source of the image to the retrieved URL
             dogImgElement.src = dogImageUrl;
-            // Style the image element
             dogImgElement.style.maxWidth = "500px";
             dogImgElement.style.maxHeight = "500px";
             dogImgElement.style.minWidth = "300px";
@@ -66,14 +60,16 @@ function fetchDog() {
         }
     });
 }
-// Dog facts API
 function dogFacts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("https://dogapi.dog/api/v2/facts");
             const dogFact = yield response.json();
-            // console.log(dogFact.data[0].attributes.body);
             const container = document.getElementById("dog-fact-container");
+            if (!container) {
+                console.error("Container not found.");
+                return;
+            }
             container.textContent = "";
             const dogFactText = JSON.stringify(dogFact.data[0].attributes.body);
             container === null || container === void 0 ? void 0 : container.append(dogFactText);
@@ -83,19 +79,16 @@ function dogFacts() {
         }
     });
 }
-// Refresh button to recall dog
 const dogRefresh = () => {
     fetchDog();
     dogFacts();
 };
 dogRefreshBtn === null || dogRefreshBtn === void 0 ? void 0 : dogRefreshBtn.addEventListener("click", dogRefresh);
-// Cat image generation API
 function fetchCat() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch("https://api.thecatapi.com/v1/images/search");
             const catImg = yield response.json();
-            // console.log(catImg[0].url);
             const catImageUrl = catImg[0].url;
             const catImgElement = document.getElementById("cat-image");
             catImgElement.src = catImageUrl;
@@ -109,7 +102,6 @@ function fetchCat() {
         }
     });
 }
-// Cat facts API
 function catFacts() {
     return __awaiter(this, void 0, void 0, function* () {
         const url = "https://random-cat-fact.p.rapidapi.com/";
@@ -123,24 +115,33 @@ function catFacts() {
         try {
             const response = yield fetch(url, options);
             const result = yield response.text();
-            // console.log(result);
             const container = document.getElementById("cat-fact-container");
-            container === null || container === void 0 ? void 0 : container.textContent = "";
-            const stringCatFact = JSON.stringify(result);
-            container === null || container === void 0 ? void 0 : container.append(stringCatFact);
+            if (!container) {
+                console.error("Container not found");
+                return;
+            }
+            container.textContent = "";
+            const parsedResult = JSON.parse(result);
+            container.textContent = parsedResult.message;
+            if (parsedResult.message ===
+                "You have exceeded the rate limit per hour for your plan, BASIC, by the API provider") {
+                container.textContent =
+                    "The API has reached it's limit :(. Here's a fun fact! The phrase raining cats and dogs originated in 17th century England when it is believed that many cats and dogs drowned during heavy periods of rain.";
+            }
+            else {
+                container.textContent = parsedResult.message;
+            }
         }
         catch (error) {
             console.error(error);
         }
     });
 }
-// Refresh button to recall cat
 const catRefresh = () => {
     fetchCat();
     catFacts();
 };
 catRefreshBtn === null || catRefreshBtn === void 0 ? void 0 : catRefreshBtn.addEventListener("click", catRefresh);
-// Initial Function Calls
 getJoke();
 fetchDog();
 dogFacts();
